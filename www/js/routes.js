@@ -11,13 +11,13 @@ angular.module('app.routes', [])
     .state('starWarsApp', {
       url: '/home',
       templateUrl: 'templates/starWarsApp.html',
-      controller: 'starWarsFilmsCtrl'
+      controller: 'StarWarsFilmsCtrl'
     })
         
     .state('filmTitle', {
       url: '/page2/:id',
       templateUrl: 'templates/filmTitle.html',
-      controller: 'filmTitleCtrl'
+      controller: 'FilmTitleCtrl'
     })
         
     ;
