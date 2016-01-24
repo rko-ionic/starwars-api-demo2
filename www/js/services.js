@@ -1,52 +1,35 @@
 angular.module('app.services', [])
 
-.factory('FilmService', ['$q',function($q){
+
+.factory('FilmService', ['$http','$q',function($http,$q){
 
     return {
-        getFilms:function() {
-            var deferred = $q.defer();
+getFilms:function() {
+    var deferred = $q.defer();
             
-            //temp 
-            var films = [
-                {
-                    id:1,
-                    title:"A New Hope",
-                    crawl:"ANH crawl"
-                },
-                {
-                    id:2,
-                    title:"The Empire Strikes Back",
-                    crawl:"ESB crawl"
-                },
-                {
-                    id:3,
-                    title:"Return of the Jedi",
-                    crawl:"ROTJ crawl"
-                },
-		{
-			id:4,
-			title:"Next movie",
-			crawl:"NM crawl"
-		 }
-            ];
-                
-            deferred.resolve(films);
-            return deferred.promise;
-        },
-        getFilm:function(id) {
-            var deferred = $q.defer();
+    $http.get("http://swapi.co/api/films").then(function(res) {
+        //console.dir(res.data.results);
+        var results = res.data.results.map(function(result) {
+           result.id = result.url;
+           return result;
+        });
+	
+        deferred.resolve(results);
+    });
+    return deferred.promise;
+},
+        
+    getFilm:function(url) {
+       var deferred = $q.defer();
             
-            //temp
-            var film = {
-                id:id,
-                title:"Film "+id,
-                crawl:"Crawl for "+id
-            };
+       $http.get(url).then(function(res) {
+          //console.dir(res.data);
+          deferred.resolve(res.data);
+       });
 
-            deferred.resolve(film);
-            return deferred.promise;
-            
-        }   
+       return deferred.promise;  
+	    }
+
     };
 
 }]);
