@@ -7,26 +7,19 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-      
         
     .state('starWarsApp', {
       url: '/home',
       templateUrl: 'templates/starWarsApp.html',
-      controller: 'starWarsAppCtrl'
+      controller: 'starWarsFilmsCtrl'
     })
         
-      
-    
-      
-        
     .state('filmTitle', {
-      url: '/page2',
+      url: '/page2/:id',
       templateUrl: 'templates/filmTitle.html',
       controller: 'filmTitleCtrl'
     })
         
-      
     ;
 
   // if none of the above states are matched, use this as the fallback
